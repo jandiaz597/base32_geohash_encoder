@@ -25,3 +25,10 @@ Geohashing maps (lat, lon) into a single string by interleaving bits and groupin
 - `decode(geohash) -> tuple[float, float]`
 - `BASE32_ALPHABET` — the 32-character string used for encoding.
 - `GeohashError` — raised by `decode` on invalid input.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
